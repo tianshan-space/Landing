@@ -991,7 +991,7 @@ body {
 }
 .about--banner {
   position: relative;
-  height: 475px;
+  /* height: 475px; */
 }
 .about--banner::before {
   content: "";
@@ -1024,6 +1024,7 @@ body {
   z-index: 1;
 }
 .about--banner h2::before {
+  display: none;
   content: "";
   position: absolute;
   top: 60px;
@@ -1036,7 +1037,7 @@ body {
 .about--banner h2::after {
   content: "";
   position: absolute;
-  top: 255px;
+  /* top: 255px; */
   left: 255px;
   width: 10px;
   height: 10px;
