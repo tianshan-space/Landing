@@ -757,7 +757,7 @@ body {
 }
 @media (max-width: 600px) {
   .intro--banner {
-    height: 360px;
+    height: 320px;
   }
   .intro--banner h1 {
     font-size: 55px;
@@ -1627,16 +1627,16 @@ body {
 }
 
 .google-map {
-    position: absolute;
-    border: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+  position: absolute;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .fade {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: #000000b5;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #000000b5;
 }
