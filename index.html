@@ -293,7 +293,7 @@
                         Giorgi Asanidze
                       </p>
                       <a
-                        href="https://www.linkedin.com/in/founder2"
+                        href="https://www.linkedin.com/in/giorgi-asanidze/"
                         target="_blank"
                         style="
                           color: #0077b5;
@@ -533,6 +533,9 @@
                       </div>
                     </div>
                     <input type="submit" value="Send Request" />
+                    <p id="success-message" style="display:none; color: green; margin-top: 10px;">
+                      Your request has been submitted successfully!
+                    </p>
                   </form>
                 </div>
               </li>
@@ -557,5 +560,53 @@
         );
     </script>
     <script src="assets/js/functions-min.js"></script>
+
+    <script>
+      document.querySelector('.work-request').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const selectedServices = Array.from(
+          document.querySelectorAll('.work-request--options input:checked')
+        ).map(checkbox => checkbox.value);
+
+        if (!name || !email) {
+          alert("Please fill in all required fields.");
+          return;
+        }
+
+        // Firebase Database URL (update with your Firebase project URL)
+        const firebaseUrl = "https://tianshan-space-default-rtdb.firebaseio.com/workRequests.json";
+
+        const requestData = {
+          name,
+          email,
+          selectedServices,
+          timestamp: new Date().toISOString()
+        };
+
+        try {
+          const response = await fetch(firebaseUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+          });
+
+          if (response.ok) {
+            document.getElementById('success-message').style.display = "block";
+
+            e.target.reset();
+          } else {
+            alert("Error submitting request.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Request failed.");
+        }
+      });
+    </script>
   </body>
 </html>

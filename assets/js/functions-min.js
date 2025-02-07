@@ -1382,13 +1382,13 @@
       });
     }
     function r() {
-      $(".work-request--information input").focusout(function () {
-        var t = $(this).val();
-        "" === t
-          ? $(this).removeClass("has-value")
-          : $(this).addClass("has-value"),
-          window.scrollTo(0, 0);
-      });
+      // $(".work-request--information input").focusout(function () {
+      //   var t = $(this).val();
+      //   "" === t
+      //     ? $(this).removeClass("has-value")
+      //     : $(this).addClass("has-value"),
+      //     window.scrollTo(0, 0);
+      // });
     }
     var o = !0,
       a = null;
