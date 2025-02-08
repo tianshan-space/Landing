@@ -1211,6 +1211,28 @@
             : ((o = r), e(o), i(s, o, r)));
     }
     function e(t) {
+      var elll = document.getElementById("menu-title");
+      let txttt = 'Home';
+      switch(t) {
+        case 0:
+          txttt = 'Home';
+          break;
+        case 1:
+          txttt = 'Works';
+          break;
+        case 2:
+          txttt = 'About';
+          break;
+        case 3:
+          txttt = 'Contact';
+          break;
+        case 4:
+          txttt = 'Hire us';
+          break;
+        default: 
+          txttt = 'Home';
+      }
+      elll.innerHTML = txttt;
       $(".side-nav, .outer-nav").children().removeClass("is-active"),
         $(".side-nav").children().eq(t).addClass("is-active"),
         $(".outer-nav").children().eq(t).addClass("is-active");
