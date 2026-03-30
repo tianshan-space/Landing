@@ -76,17 +76,37 @@
     });
   }
 
-  function initCalendlyRefTracking() {
+  function initCalendlyTracking() {
     var urlParams = new URLSearchParams(window.location.search);
-    var refId = urlParams.get("ref") || urlParams.get("ref_id");
+    var utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+    var utmValues = {};
 
-    if (refId) {
-      localStorage.setItem("calendly_ref_id", refId);
-    } else {
-      refId = localStorage.getItem("calendly_ref_id");
+    utmKeys.forEach(function (key) {
+      var value = urlParams.get(key);
+      if (value) {
+        utmValues[key] = value;
+      }
+    });
+
+    if (!utmValues.utm_content) {
+      var refId = urlParams.get("ref") || urlParams.get("ref_id");
+      if (refId) {
+        utmValues.utm_content = refId;
+      }
     }
 
-    if (!refId) {
+    if (Object.keys(utmValues).length > 0) {
+      localStorage.setItem("calendly_utm", JSON.stringify(utmValues));
+    } else {
+      try {
+        var storedUtm = localStorage.getItem("calendly_utm");
+        utmValues = storedUtm ? JSON.parse(storedUtm) : {};
+      } catch (error) {
+        utmValues = {};
+      }
+    }
+
+    if (Object.keys(utmValues).length === 0) {
       return;
     }
 
@@ -94,13 +114,11 @@
     calendlyLinks.forEach(function (link) {
       try {
         var calendlyUrl = new URL(link.href);
-        if (!calendlyUrl.searchParams.get("utm_source")) {
-          calendlyUrl.searchParams.set("utm_source", "website");
-        }
-        if (!calendlyUrl.searchParams.get("utm_medium")) {
-          calendlyUrl.searchParams.set("utm_medium", "landing");
-        }
-        calendlyUrl.searchParams.set("utm_content", refId);
+        utmKeys.forEach(function (key) {
+          if (utmValues[key]) {
+            calendlyUrl.searchParams.set(key, utmValues[key]);
+          }
+        });
         link.href = calendlyUrl.toString();
       } catch (error) {
         console.error("Invalid Calendly URL:", link.href, error);
@@ -124,6 +142,6 @@
   }
 
   initWorkRequestForm();
-  initCalendlyRefTracking();
+  initCalendlyTracking();
   initClarity();
 })();
