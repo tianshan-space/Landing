@@ -51,7 +51,7 @@ $(document).ready(function () {
     }
   });
 
-  $(".side-nav li, .outer-nav li").click(function () {
+  $(".side-nav li, .outer-nav li:not(.nav-external)").click(function () {
     if (!$(this).hasClass("is-active")) {
       var $this = $(this),
         curActive = $this.parent().find(".is-active"),
