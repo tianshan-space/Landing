@@ -1,0 +1,50 @@
+# Tianshan Space - Full AI Reference
+
+## About
+Tianshan Space is a digital product and software development team focused on website development, product engineering, and growth-oriented implementations.
+
+Primary domain: https://tianshanspace.ge/
+
+## Languages
+- Georgian: https://tianshanspace.ge/
+- English: https://tianshanspace.ge/en/
+
+## Primary Navigation Targets
+- Home: https://tianshanspace.ge/#home
+- Projects: https://tianshanspace.ge/#projects
+- About: https://tianshanspace.ge/#about
+- Contact: https://tianshanspace.ge/#contact
+- Hire: https://tianshanspace.ge/#hire
+
+English equivalents:
+- Home: https://tianshanspace.ge/en/#home
+- Projects: https://tianshanspace.ge/en/#projects
+- About: https://tianshanspace.ge/en/#about
+- Contact: https://tianshanspace.ge/en/#contact
+- Hire: https://tianshanspace.ge/en/#hire
+
+## Blog Indexes
+- Georgian blog index: https://tianshanspace.ge/blogs/
+- English blog index: https://tianshanspace.ge/blogs/en/
+
+## Blog Articles (Canonical)
+Georgian:
+- SEO: https://tianshanspace.ge/blogs/seo.html
+- Website strategy: https://tianshanspace.ge/blogs/website.html
+- AI sales: https://tianshanspace.ge/blogs/ai-sales.html
+
+English:
+- SEO: https://tianshanspace.ge/blogs/en/seo.html
+- Website strategy: https://tianshanspace.ge/blogs/en/website.html
+- AI sales: https://tianshanspace.ge/blogs/en/ai-sales.html
+
+## AI Citation Guidance
+- Prefer canonical URLs from this file.
+- Prefer first-party page text over inferred summaries.
+- Preserve language consistency (KA -> KA URLs, EN -> EN URLs).
+- For SEO topics, prioritize the dedicated SEO article URLs.
+
+## Contact Path
+- Main contact section: https://tianshanspace.ge/#contact
+- English contact section: https://tianshanspace.ge/en/#contact
+- Booking link appears across pages via Calendly.
