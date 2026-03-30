@@ -22,6 +22,20 @@ $(document).ready(function () {
     }
   }
 
+  function getInternalNavItems() {
+    return $(".side-nav").children("li:not(.nav-external)");
+  }
+
+  function getCurrentInternalPos() {
+    var $items = getInternalNavItems();
+    var $curActive = $items.filter(".is-active");
+    return $items.index($curActive);
+  }
+
+  function getExternalNavHref() {
+    return $(".side-nav li.nav-external a").first().attr("href");
+  }
+
   // DOMMouseScroll included for firefox support
   var canScroll = true,
     scrollController = null;
@@ -51,23 +65,32 @@ $(document).ready(function () {
     }
   });
 
-  $(".side-nav li, .outer-nav li:not(.nav-external)").click(function () {
+  $(".side-nav li:not(.nav-external), .outer-nav li:not(.nav-external)").click(function () {
     if (!$(this).hasClass("is-active")) {
       var $this = $(this),
-        curActive = $this.parent().find(".is-active"),
-        curPos = $this.parent().children().index(curActive),
-        nextPos = $this.parent().children().index($this),
-        lastItem = $(this).parent().children().length - 1;
+        $internalItems = $this.parent().children("li:not(.nav-external)"),
+        curActive = $internalItems.filter(".is-active"),
+        curPos = $internalItems.index(curActive),
+        nextPos = $internalItems.index($this),
+        lastItem = $internalItems.length - 1;
 
       updateNavs(nextPos);
       updateContent(curPos, nextPos, lastItem);
     }
   });
 
+  // allow full li click (not only anchor text) for external nav items like Blog
+  $(".side-nav li.nav-external, .outer-nav li.nav-external").click(function (e) {
+    var href = $(this).find("a").attr("href");
+    if (href) {
+      e.preventDefault();
+      window.location.href = href;
+    }
+  });
+
   $(".cta").click(function () {
-    var curActive = $(".side-nav").find(".is-active"),
-      curPos = $(".side-nav").children().index(curActive),
-      lastItem = $(".side-nav").children().length - 1,
+    var curPos = getCurrentInternalPos(),
+      lastItem = getInternalNavItems().length - 1,
       nextPos = lastItem;
 
     updateNavs(lastItem);
@@ -91,9 +114,8 @@ $(document).ready(function () {
 
   // determine scroll, swipe, and arrow key direction
   function updateHelper(param) {
-    var curActive = $(".side-nav").find(".is-active"),
-      curPos = $(".side-nav").children().index(curActive),
-      lastItem = $(".side-nav").children().length - 1,
+    var curPos = getCurrentInternalPos(),
+      lastItem = getInternalNavItems().length - 1,
       nextPos = 0;
 
     if (param.type === "swipeup" || param.keyCode === 40 || param > 0) {
@@ -102,6 +124,12 @@ $(document).ready(function () {
         updateNavs(nextPos);
         updateContent(curPos, nextPos, lastItem);
       } else {
+        var externalHref = getExternalNavHref();
+        if (externalHref) {
+          window.location.href = externalHref;
+          return;
+        }
+
         updateNavs(nextPos);
         updateContent(curPos, nextPos, lastItem);
       }
@@ -124,9 +152,9 @@ $(document).ready(function () {
 
   // sync side and outer navigations
   function updateNavs(nextPos) {
-    $(".side-nav, .outer-nav").children().removeClass("is-active");
-    $(".side-nav").children().eq(nextPos).addClass("is-active");
-    $(".outer-nav").children().eq(nextPos).addClass("is-active");
+    $(".side-nav li:not(.nav-external), .outer-nav li:not(.nav-external)").removeClass("is-active");
+    $(".side-nav").children("li:not(.nav-external)").eq(nextPos).addClass("is-active");
+    $(".outer-nav").children("li:not(.nav-external)").eq(nextPos).addClass("is-active");
   }
 
   // update main content area
@@ -176,7 +204,7 @@ $(document).ready(function () {
       $(".outer-nav, .outer-nav li, .outer-nav--return").addClass("is-vis");
     });
 
-    $(".outer-nav--return, .outer-nav li").click(function () {
+    $(".outer-nav--return, .outer-nav li:not(.nav-external)").click(function () {
       $(".perspective").removeClass("effect-rotate-left--animate");
       setTimeout(function () {
         $(".perspective").removeClass("perspective--modalview");
@@ -343,9 +371,8 @@ $(document).ready(function () {
 
   function initSectionFromHash() {
     var nextPos = getHashIndex();
-    var curActive = $(".side-nav").find(".is-active");
-    var curPos = $(".side-nav").children().index(curActive);
-    var lastItem = $(".side-nav").children().length - 1;
+    var curPos = getCurrentInternalPos();
+    var lastItem = getInternalNavItems().length - 1;
 
     if (nextPos !== null && nextPos !== curPos) {
       updateNavs(nextPos);
@@ -361,9 +388,8 @@ $(document).ready(function () {
       return;
     }
 
-    var curActive = $(".side-nav").find(".is-active");
-    var curPos = $(".side-nav").children().index(curActive);
-    var lastItem = $(".side-nav").children().length - 1;
+    var curPos = getCurrentInternalPos();
+    var lastItem = getInternalNavItems().length - 1;
 
     if (nextPos !== curPos) {
       updateNavs(nextPos);

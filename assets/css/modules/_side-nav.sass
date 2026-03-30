@@ -51,6 +51,9 @@
   li:nth-child(5)::before
     content: "05"
 
+  li:nth-child(6)::before
+    content: "06"
+
   li.is-active
     color: $highlight
     transition: color .4s ease-in-out
@@ -63,3 +66,17 @@
     &::before
       left: -33px
       color: $white
+
+  li:hover
+    color: $highlight
+    transition: color .2s ease-in-out
+
+    span
+      opacity: 1
+      visibility: visible
+      transition: opacity .2s ease-in-out
+
+    &::before
+      left: -33px
+      color: $white
+      transition: left .2s ease-in-out, color .2s ease-in-out

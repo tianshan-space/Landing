@@ -581,6 +581,9 @@ body {
 .side-nav li:nth-child(5)::before {
   content: "05";
 }
+.side-nav li:nth-child(6)::before {
+  content: "06";
+}
 .side-nav li.is-active {
   color: #0f33ff;
   -webkit-transition: color 0.4s ease-in-out;
@@ -595,6 +598,23 @@ body {
 .side-nav li.is-active::before {
   left: -33px;
   color: #fff;
+}
+.side-nav li:hover {
+  color: #0f33ff;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+.side-nav li:hover span {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+.side-nav li:hover::before {
+  left: -33px;
+  color: #fff;
+  -webkit-transition: left 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition: left 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 .intro {
   position: relative;
