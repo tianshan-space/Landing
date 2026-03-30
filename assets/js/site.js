@@ -76,6 +76,89 @@
     });
   }
 
+  function initProjectsFromJson() {
+    var slider = document.querySelector(".work .slider");
+    if (!slider) {
+      return;
+    }
+
+    var projectsJsonUrl = slider.getAttribute("data-projects-json");
+    if (!projectsJsonUrl) {
+      return;
+    }
+
+    fetch(projectsJsonUrl)
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Failed to load projects.json");
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        if (!data || !Array.isArray(data.projects) || data.projects.length === 0) {
+          return;
+        }
+
+        var language = getLanguage();
+        var validProjects = data.projects.filter(function (project) {
+          if (!project || !project.url || !project.title || !project.image || !project.description) {
+            return false;
+          }
+          var descriptions = project.description || {};
+          return Boolean(descriptions[language] || descriptions.en || descriptions.ka);
+        });
+
+        if (validProjects.length === 0) {
+          return;
+        }
+
+        slider.innerHTML = "";
+
+        validProjects.forEach(function (project, index) {
+          var item = document.createElement("li");
+          item.className = "slider--item";
+
+          if (index === 0) {
+            item.classList.add("slider--item-left");
+          } else if (index === 1) {
+            item.classList.add("slider--item-center");
+          } else if (index === 2) {
+            item.classList.add("slider--item-right");
+          }
+
+          var projectUrl = project.url;
+          var projectTitle = project.title;
+          var projectImage = project.image;
+          var descriptions = project.description || {};
+          var projectDescription = descriptions[language] || descriptions.en || descriptions.ka;
+
+          item.innerHTML =
+            '<a href="' +
+            projectUrl +
+            '">' +
+            '<div class="slider--item-image">' +
+            '<img src="' +
+            projectImage +
+            '" alt="' +
+            projectTitle +
+            '" />' +
+            "</div>" +
+            '<p class="slider--item-title">' +
+            projectTitle +
+            "</p>" +
+            '<p class="slider--item-description">' +
+            projectDescription +
+            "</p>" +
+            "</a>";
+
+          slider.appendChild(item);
+        });
+      })
+      .catch(function () {
+        // Keep existing hardcoded slider as fallback when JSON is unavailable.
+      });
+  }
+
   function initCalendlyTracking() {
     var urlParams = new URLSearchParams(window.location.search);
     var utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
@@ -141,6 +224,7 @@
     })(window, document, "clarity", "script", "q6913xit71");
   }
 
+  initProjectsFromJson();
   initWorkRequestForm();
   initCalendlyTracking();
   initClarity();

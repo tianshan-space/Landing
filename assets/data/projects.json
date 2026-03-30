@@ -1,0 +1,54 @@
+{
+  "projects": [
+    {
+      "id": "poti-trans-terminal",
+      "url": "https://poti-transterminal.tianshanspace.ge/",
+      "image": "/assets/img/poti.png",
+      "title": "Poti Trans Terminal",
+      "description": {
+        "ka": "ფოთის ტერმინალის საიმიჯო ვებსაიტი.",
+        "en": "Poti transterminal landing page."
+      }
+    },
+    {
+      "id": "chemistry-lab",
+      "url": "https://chemistry-lab.tianshanspace.ge",
+      "image": "/assets/img/chemistry-lab.png",
+      "title": "Chemistry Lab",
+      "description": {
+        "ka": "ქიმიის ლაბორატორიის სასწავლო ვებპლატფორმა.",
+        "en": "Web platform for chemistry lab learning."
+      }
+    },
+    {
+      "id": "easydine",
+      "url": "https://easydine.ge",
+      "image": "/assets/img/easydine.png",
+      "title": "EasyDine",
+      "description": {
+        "ka": "რესტორნების ჯავშნის მართვის სისტემა.",
+        "en": "Restaurant reservation management system."
+      }
+    },
+    {
+      "id": "wishly",
+      "url": "https://wishly-app.com",
+      "image": "/assets/img/wishly.webp",
+      "title": "Wishly",
+      "description": {
+        "ka": "სასურველების სიისა და საჩუქრების პლატფორმა.",
+        "en": "Gift registry and wish list system."
+      }
+    },
+    {
+      "id": "wms",
+      "url": "#0",
+      "image": "/assets/img/wms.webp",
+      "title": "WMS",
+      "description": {
+        "ka": "საწყობის მართვის სისტემა.",
+        "en": "Warehouse management system."
+      }
+    }
+  ]
+}

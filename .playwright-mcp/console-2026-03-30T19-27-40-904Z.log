@@ -1,0 +1,10 @@
+[     120ms] ReferenceError: Hammer is not defined
+    at HTMLDocument.<anonymous> (http://localhost:5501/assets/js/functions.js:79:10)
+    at i (https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js:2:27151)
+    at Object.fireWith [as resolveWith] (https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js:2:27914)
+    at n.ready (https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js:2:29707)
+    at HTMLDocument.J (https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js:2:29892)
+[     348ms] [WARNING] Data from this session is not being collected by Microsoft Clarity due to your configured project settings @ https://www.clarity.ms/tag/q6913xit71:0
+[   24758ms] [WARNING] Data from this session is not being collected by Microsoft Clarity due to your configured project settings @ https://www.clarity.ms/tag/q6913xit71:0
+[   27177ms] [WARNING] Data from this session is not being collected by Microsoft Clarity due to your configured project settings @ https://www.clarity.ms/tag/q6913xit71:0
+[   28297ms] [WARNING] Data from this session is not being collected by Microsoft Clarity due to your configured project settings @ https://www.clarity.ms/tag/q6913xit71:0
