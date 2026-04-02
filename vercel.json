@@ -1,3 +1,25 @@
 {
-  "cleanUrls": true
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/saitis-awyoba",
+      "destination": "/ka/saitis-awyoba.html",
+      "permanent": true
+    },
+    {
+      "source": "/saitis-awyoba.html",
+      "destination": "/ka/saitis-awyoba.html",
+      "permanent": true
+    },
+    {
+      "source": "/website-development",
+      "destination": "/en/website-development.html",
+      "permanent": true
+    },
+    {
+      "source": "/website-development.html",
+      "destination": "/en/website-development.html",
+      "permanent": true
+    }
+  ]
 }
