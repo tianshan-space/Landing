@@ -107,53 +107,15 @@
   </script>
 </head>
   <body>
-    <div class="device-notification">
-      <a class="device-notification--logo" href="#0">
-        <img src="assets/img/logo.png" width="50px" alt="Tianshan" />
-        <p>Tianshan</p>
-      </a>
-      <p class="device-notification--message">
-        Tianshan-ს იმდენი აქვს შემოთავაზებული, რომ გთხოვთ, გამოიყენოთ
-        პორტრეტის რეჟიმი ან უფრო დიდი ეკრანი. იმედებს არ გაგიცრუებთ.
-      </p>
-    </div>
+    <div id="device-notification"></div>
 
     <div class="perspective effect-rotate-left">
       <div class="container">
         <div class="outer-nav--return"></div>
         <div id="viewport" class="l-viewport">
           <div class="l-wrapper">
-            <header class="header">
-              <a class="header--logo" href="#0">
-                <img src="assets/img/logo.png" width="50px" alt="Tianshan" />
-                <p id="page-title">Tianshan</p>
-                <p id="menu-title" style="display: none;">მთავარი</p>
-              </a>
-              <button class="header--cta cta"><a
-                href="https://calendly.com/mikheil-tianshan/30min"
-                target="_blank"
-                style="text-decoration: none; color: inherit"
-                >დაჯავშნე ზარი</a
-              ></button>
-              <div class="lang-switch" style="position: absolute; right: 60px; top: 50%; transform: translateY(-50%); display: inline-flex; gap: 6px; z-index: 11;">
-                <a href="/" style="padding: 6px 10px; border: 1px solid #fff; background: #fff; color: #0c0c0c; font-size: 11px; letter-spacing: 0.08em; text-decoration: none;">KA</a>
-                <a href="/en/" style="padding: 6px 10px; border: 1px solid #fff; background: transparent; color: #fff; font-size: 11px; letter-spacing: 0.08em; text-decoration: none;">EN</a>
-              </div>
-              
-              <div class="header--nav-toggle">
-                <span></span>
-              </div>
-            </header>
-            <nav class="l-side-nav">
-              <ul class="side-nav">
-                <li class="is-active"><span>მთავარი</span></li>
-                <li><span>ნამუშევრები</span></li>
-                <li><span>ჩვენს შესახებ</span></li>
-                <li><span>კონტაქტი</span></li>
-                <li><span>დაგვიქირავე</span></li>
-                <li class="nav-external"><span><a href="/blogs/" style="color: inherit; text-decoration: none;">ბლოგი</a></span></li>
-              </ul>
-            </nav>
+            <div id="landing-header"></div>
+            <div id="landing-side-nav"></div>
             <ul class="l-main-content main-content">
               <li class="l-section section section--is-active">
                 <div class="intro">
@@ -604,25 +566,36 @@
           </div>
         </div>
       </div>
-      <ul class="outer-nav">
-        <li class="is-active">მთავარი</li>
-        <li>ნამუშევრები</li>
-        <li>ჩვენს შესახებ</li>
-        <li>კონტაქტი</li>
-        <li>დაგვიქირავე</li>
-        <li class="nav-external"><a href="/blogs/" style="color: inherit; text-decoration: none;">ბლოგი</a></li>
-      </ul>
+      <div id="landing-outer-nav"></div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/assets/js/component-loader.js"></script>
     <script>
-      window.jQuery ||
-        document.write(
-          '<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>'
-        );
+      loadComponents({
+        "device-notification": "/components/landing/ka/device-notification.html",
+        "landing-header": "/components/landing/ka/header.html",
+        "landing-side-nav": "/components/landing/ka/side-nav.html",
+        "landing-outer-nav": "/components/landing/ka/outer-nav.html"
+      })
+        .then(function () {
+          return loadScript("https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js");
+        })
+        .then(function () {
+          if (window.jQuery) {
+            return Promise.resolve();
+          }
+          return loadScript("/assets/js/vendor/jquery-2.2.4.min.js");
+        })
+        .then(function () {
+          return loadScriptsSequentially([
+            "/assets/js/vendor/hammer-2.0.8.js",
+            "/assets/js/functions.js",
+            "/assets/js/site.js"
+          ]);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     </script>
-    <script src="assets/js/vendor/hammer-2.0.8.js"></script>
-    <script src="assets/js/functions.js"></script>
-    <script src="assets/js/site.js"></script>
   </body>
 </html>

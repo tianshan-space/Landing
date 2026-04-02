@@ -106,81 +106,20 @@
   </script>
 </head>
   <body>
-    <div class="device-notification">
-      <a class="device-notification--logo" href="#0">
-        <img src="/assets/img/logo.png" width="50px" alt="Tianshan" />
-        <p>Tianshan</p>
-      </a>
-      <p class="device-notification--message">
-        Tianshan has so much to offer that we must request you orient your
-        device to portrait or find a larger screen. You won't be disappointed.
-      </p>
-    </div>
+    <div id="device-notification"></div>
 
     <div class="perspective effect-rotate-left">
       <div class="container">
         <div class="outer-nav--return"></div>
         <div id="viewport" class="l-viewport">
           <div class="l-wrapper">
-            <header class="header">
-              <a class="header--logo" href="#0">
-                <img src="/assets/img/logo.png" width="50px" alt="Tianshan" />
-                <p id="page-title">Tianshan</p>
-                <p id="menu-title" style="display: none;">Home</p>
-              </a>
-              <button class="header--cta cta"><a
-                href="https://calendly.com/mikheil-tianshan/30min"
-                target="_blank"
-                style="text-decoration: none; color: inherit"
-                >Book a call</a
-              ></button>
-              <div class="lang-switch" style="position: absolute; right: 60px; top: 50%; transform: translateY(-50%); display: inline-flex; gap: 6px; z-index: 11;">
-                <a href="/" style="padding: 6px 10px; border: 1px solid #fff; background: transparent; color: #fff; font-size: 11px; letter-spacing: 0.08em; text-decoration: none;">KA</a>
-                <a href="/en/" style="padding: 6px 10px; border: 1px solid #fff; background: #fff; color: #0c0c0c; font-size: 11px; letter-spacing: 0.08em; text-decoration: none;">EN</a>
-              </div>
-              
-              <div class="header--nav-toggle">
-                <span></span>
-              </div>
-            </header>
-            <nav class="l-side-nav">
-              <ul class="side-nav">
-                <li class="is-active"><span>Home</span></li>
-                <li><span>Works</span></li>
-                <li><span>About</span></li>
-                <li><span>Contact</span></li>
-                <li><span>Hire us</span></li>
-                <li class="nav-external"><span><a href="/blogs/en/" style="color: inherit; text-decoration: none;">Blog</a></span></li>
-              </ul>
-            </nav>
+            <div id="landing-header"></div>
+            <div id="landing-side-nav"></div>
             <ul class="l-main-content main-content">
               <li class="l-section section section--is-active">
                 <div class="intro">
                   <div class="intro--banner">
                     <h1>Turning<br />Vision<br />Into Reality</h1>
-                    <!-- <button class="cta">
-                      Hire Us
-                      <svg
-                        version="1.1"
-                        id="Layer_1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 150 118"
-                        style="enable-background: new 0 0 150 118"
-                        xml:space="preserve"
-                      >
-                        <g
-                          transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)"
-                        >
-                          <path
-                            d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"
-                          />
-                        </g>
-                      </svg>
-                      <span class="btn-background"></span>
-                    </button> -->
                     <button>
                       <a
                         href="https://calendly.com/mikheil-tianshan/30min"
@@ -627,25 +566,36 @@
           </div>
         </div>
       </div>
-      <ul class="outer-nav">
-        <li class="is-active">Home</li>
-        <li>Works</li>
-        <li>About</li>
-        <li>Contact</li>
-        <li>Hire us</li>
-        <li class="nav-external"><a href="/blogs/en/" style="color: inherit; text-decoration: none;">Blog</a></li>
-      </ul>
+      <div id="landing-outer-nav"></div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/assets/js/component-loader.js"></script>
     <script>
-      window.jQuery ||
-        document.write(
-          '<script src="/assets/js/vendor/jquery-2.2.4.min.js"><\/script>'
-        );
+      loadComponents({
+        "device-notification": "/components/landing/en/device-notification.html",
+        "landing-header": "/components/landing/en/header.html",
+        "landing-side-nav": "/components/landing/en/side-nav.html",
+        "landing-outer-nav": "/components/landing/en/outer-nav.html"
+      })
+        .then(function () {
+          return loadScript("https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js");
+        })
+        .then(function () {
+          if (window.jQuery) {
+            return Promise.resolve();
+          }
+          return loadScript("/assets/js/vendor/jquery-2.2.4.min.js");
+        })
+        .then(function () {
+          return loadScriptsSequentially([
+            "/assets/js/vendor/hammer-2.0.8.js",
+            "/assets/js/functions.js",
+            "/assets/js/site.js"
+          ]);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     </script>
-    <script src="/assets/js/vendor/hammer-2.0.8.js"></script>
-    <script src="/assets/js/functions.js"></script>
-    <script src="/assets/js/site.js"></script>
   </body>
 </html>

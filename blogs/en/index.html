@@ -68,23 +68,7 @@
   </script>
 </head>
 <body>
-  <div class="blog-header-wrap">
-    <div class="blog-wrap">
-      <header class="blog-header">
-        <a class="blog-header-logo" href="/en/">
-          <img src="/assets/img/logo.png" alt="Tianshan" />
-          <p>Tianshan</p>
-        </a>
-        <div class="blog-header-actions">
-          <button class="blog-header-cta"><a href="https://calendly.com/mikheil-tianshan/30min" target="_blank" rel="noopener noreferrer">Book a call</a></button>
-          <div class="blog-header-langs">
-            <a class="blog-lang-link" href="/blogs/">KA</a>
-            <a class="blog-lang-link is-active" href="/blogs/en/">EN</a>
-          </div>
-        </div>
-      </header>
-    </div>
-  </div>
+  <div id="blog-header"></div>
 
   <main class="blog-page">
     <div class="blog-wrap">
@@ -115,6 +99,14 @@
       </section>
     </div>
   </main>
+  <script src="/assets/js/component-loader.js"></script>
+  <script>
+    loadComponents({
+      "blog-header": "/components/blog/en/header.html"
+    }).catch(function (error) {
+      console.error(error);
+    });
+  </script>
   <script src="/assets/js/site.js"></script>
 </body>
 </html>
