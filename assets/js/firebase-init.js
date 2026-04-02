@@ -20,3 +20,22 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 getAnalytics(app);
+
+// Google tag (gtag.js)
+if (!window.dataLayer) {
+  window.dataLayer = [];
+}
+
+if (typeof window.gtag !== "function") {
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+}
+
+const gtagScript = document.createElement("script");
+gtagScript.async = true;
+gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-QBX0KX5BL5";
+document.head.appendChild(gtagScript);
+
+window.gtag("js", new Date());
+window.gtag("config", "G-QBX0KX5BL5");
